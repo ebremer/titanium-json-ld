@@ -3,7 +3,6 @@ package com.apicatalog.jsonld.compaction;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -301,7 +300,7 @@ public final class Compaction {
                                                 .compact(Keywords.REVERSE, expandedValue)
                                                 .asJsonObject());
                 // 12.3.2.
-                for (final Entry<String, JsonValue> entry : new HashSet<>(compactedMap.entrySet())) {
+                for (final Entry<String, JsonValue> entry : compactedMap.entrySet()) {
                     
                     // 12.3.2.1.
                     if (activeContext.getTerm(entry.getKey()).map(TermDefinition::isReverseProperty).orElse(false)) {
@@ -817,9 +816,9 @@ public final class Compaction {
                         // 12.8.9.8.4.
                         if (JsonUtils.isObject(compactedItem) && compactedItem.asJsonObject().size() == 1) {
                             
-                            String epandedKey = activeContext.uriExpansion().vocab(true).expand(compactedItem.asJsonObject().keySet().iterator().next());
+                            String expandedKey = activeContext.uriExpansion().vocab(true).expand(compactedItem.asJsonObject().keySet().iterator().next());
                             
-                            if (Keywords.ID.equals(epandedKey)) {
+                            if (Keywords.ID.equals(expandedKey)) {
 
                                 JsonObject map = Json.createObjectBuilder().add(Keywords.ID, expandedItem.asJsonObject().get(Keywords.ID)).build();
                                 

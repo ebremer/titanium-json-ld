@@ -3,7 +3,6 @@ package com.apicatalog.jsonld.uri;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 
@@ -158,7 +157,7 @@ public final class UriResolver {
             }
         }
 
-        return output.stream().collect(Collectors.joining());
+        return String.join("", output);
     }
 
     /**

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public final class Path {
 
@@ -30,7 +29,7 @@ public final class Path {
                                                     ? path
                                                     : path.substring(1)
                                                     )
-                                                .split("\\/")
+                                                .split("/")
                                                 )
                                         );
         final String last = (path.length() > 1 && path.endsWith("/"))
@@ -119,7 +118,7 @@ public final class Path {
         return (relative 
                     ? ""
                     : "/")
-                    .concat(segments.stream().collect(Collectors.joining("/")))
+                    .concat(String.join("/", segments))
                     .concat(segments.isEmpty() ? "" : "/")
                     .concat(last != null ? last : "")
                 ;
